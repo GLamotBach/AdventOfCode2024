@@ -1,5 +1,5 @@
 # Advent of Code 2024 - Day 4
-# Task 1
+# ***** TASK - 1 *****
 
 input_data = open("day_4_input.txt", "r")
 word_puzzle = []
@@ -45,3 +45,21 @@ for x in range(len(word_puzzle)):
                     word_count += 1
 print(f"Task 1: {word_count}")
 
+# ***** TASK - 2 *****
+
+word_count_t2 = 0
+for x in range(1,len(word_puzzle)-1):
+    for y in range(1,len(word_puzzle[x])-1):
+        if word_puzzle[x][y] == 'A':
+            cross = 0
+            if word_puzzle[x-1][y-1] == 'M' and word_puzzle[x+1][y+1] == 'S':
+                cross += 1
+            if word_puzzle[x-1][y-1] == 'S' and word_puzzle[x+1][y+1] == 'M':
+                cross += 1
+            if word_puzzle[x-1][y+1] == 'S' and word_puzzle[x+1][y-1] == 'M':
+                cross += 1
+            if word_puzzle[x-1][y+1] == 'M' and word_puzzle[x+1][y-1] == 'S':
+                cross += 1
+            if cross == 2:
+                word_count_t2 += 1
+print(f"Task 2: {word_count_t2}")
