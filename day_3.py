@@ -3,6 +3,7 @@
 import regex
 
 input_data = open("day_3_input.txt", "r")
+
 pattern = r"mul\((\d{1,3}),(\d{1,3})\)"
 total = 0
 for i in input_data:
@@ -12,4 +13,3 @@ for i in input_data:
         total += score
 
 print(f'Task 1 - {total}')
-
