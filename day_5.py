@@ -1,5 +1,6 @@
 # Advent of Code 2024 - Day 5
 # ***** TASK - 1 *****
+incorrect_lines = []
 
 
 def middle_number(updte):
@@ -18,6 +19,7 @@ def check_order(update_line, rule_set):
     if violations == 0:
         return middle_number(update_line)
     else:
+        incorrect_lines.append(update_line)
         return 0
 
 
@@ -46,3 +48,26 @@ for u in updates:
     score += check_order(u, rules)
 
 print(f"Task 1: {score}")
+
+# ***** TASK - 2 *****
+
+
+def sort_update(update_line, rule_set):
+    for i in range(len(update_line)):
+        previous_pages = update_line[:i]
+        for r in rule_set:
+            if r[0] == update_line[i]:
+                if r[1] in previous_pages:
+                    update_line[i-1], update_line[i] = update_line[i], update_line[i-1]
+                    update_line = sort_update(update_line, rule_set)
+    return update_line
+
+
+def update_fixer(update_lines, rule_set):
+    score_task_2 = 0
+    for update_line in update_lines:
+        score_task_2 += middle_number(sort_update(update_line,rule_set))
+    return score_task_2
+
+
+print(f"Task 2: {update_fixer(incorrect_lines, rules)}")
